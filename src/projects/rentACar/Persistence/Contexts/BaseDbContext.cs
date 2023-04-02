@@ -21,11 +21,11 @@ public class BaseDbContext : DbContext
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
-        IEnumerable<EntityEntry<Entity>> entries = ChangeTracker
-            .Entries<Entity>()
+        IEnumerable<EntityEntry<Entity<long>>> entries = ChangeTracker
+            .Entries<Entity<long>>()
             .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-        foreach (EntityEntry<Entity> entry in entries)
+        foreach (EntityEntry<Entity<long>> entry in entries)
             _ = entry.State switch
             {
                 EntityState.Added => entry.Entity.CreatedDate = DateTime.UtcNow,

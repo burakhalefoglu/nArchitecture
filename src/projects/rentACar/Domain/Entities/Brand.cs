@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Brand : Entity
+    public class Brand : Entity<long>
     {
         public string Name { get; set; }
 
-        public Brand(string name, int id)
+        public Brand() { }
+
+        public Brand(string name, long id):this()
         {
             Id = id;
             Name = name;
